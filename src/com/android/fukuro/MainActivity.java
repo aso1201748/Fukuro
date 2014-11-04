@@ -2,6 +2,7 @@ package com.android.fukuro;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +11,17 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends Activity implements View.OnClickListener{
+
+
+	private DBHelper dbHelper = new DBHelper(this);
+
+	public static SQLiteDatabase db;
+
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		dbHelper.close();
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -42,7 +54,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			case R.id.button3:
 
 				//インテントに、この画面と、遷移する別の画面を指定する
-				intent = new Intent(MainActivity.this, InfoEditActivity.class);
+				intent = new Intent(MainActivity.this, OutputActivity.class);
 
 				//インテントで指定した別の画面に遷移する
 				startActivity(intent);
@@ -65,6 +77,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         Button btn3 = (Button)findViewById(R.id.button3);
         btn3.setOnClickListener(this);
+
+		db = dbHelper.getWritableDatabase();
 
 	}
 

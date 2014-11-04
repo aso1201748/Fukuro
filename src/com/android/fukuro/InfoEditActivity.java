@@ -165,6 +165,8 @@ public class InfoEditActivity extends Activity implements View.OnClickListener{
 				c2.moveToNext();
 			}
 
+			ItemList = new ArrayList<String>();
+
 			break;
 
 		case R.id.button2:

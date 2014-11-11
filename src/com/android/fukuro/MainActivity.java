@@ -54,7 +54,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			case R.id.button3:
 
 				//インテントに、この画面と、遷移する別の画面を指定する
-				intent = new Intent(MainActivity.this, OutputActivity.class);
+				intent = new Intent(MainActivity.this, RankShowActivity.class);
 
 				//インテントで指定した別の画面に遷移する
 				startActivity(intent);

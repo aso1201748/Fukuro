@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,12 +15,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 public class InfoEditActivity extends Activity implements View.OnClickListener{
@@ -28,6 +32,8 @@ public class InfoEditActivity extends Activity implements View.OnClickListener{
 
 	public static SQLiteDatabase db;
 
+	RelativeLayout mainLayout;
+	InputMethodManager inputMethodManager;
 	Long str = null;
 	String memo = null;
 	String path = null;
@@ -52,6 +58,11 @@ public class InfoEditActivity extends Activity implements View.OnClickListener{
         btn2.setOnClickListener(this);
 
         EditText text1 = (EditText)findViewById(R.id.editText1);
+        //画面全体のレイアウト
+        mainLayout = (RelativeLayout)findViewById(R.id.RelativeLayout1);
+        //キーボード表示を制御するためのオブジェクト
+        inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
 
 		Intent inte = getIntent();
 		path = inte.getStringExtra("Fpath");
@@ -110,6 +121,16 @@ public class InfoEditActivity extends Activity implements View.OnClickListener{
         	    });
 
 	}
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+         //キーボードを隠す
+         inputMethodManager.hideSoftInputFromWindow(mainLayout.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+         //背景にフォーカスを移す
+         mainLayout.requestFocus();
+
+         return false;
+    }
 
     private TextWatcher watchHandler = new TextWatcher() {
 

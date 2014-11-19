@@ -2,6 +2,7 @@ package com.android.fukuro;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -76,21 +77,22 @@ public class RankShowActivity extends Activity implements DownloadListTaskCallba
 
 
 			URL url = null;
+
+
 			try {
 				url = new URL("http://koyoshi.php.xdomain.jp/Item/" + imgList);
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+				connection.setDoInput(true);
+				connection.connect();
+				InputStream input = connection.getInputStream();
+				Bitmap myBitmap = BitmapFactory.decodeStream(input);
 			} catch (MalformedURLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
-			}
-			try {
-				InputStream is = url.openStream();
-				myBitmap = BitmapFactory.decodeStream(is);
 			} catch (IOException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-
-
 
 		ImageView imgView = (ImageView)findViewById(R.id.imageView1);
 	    // アダプターを設定します

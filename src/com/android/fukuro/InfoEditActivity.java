@@ -51,7 +51,7 @@ public class InfoEditActivity extends Activity implements View.OnClickListener{
 
 		db = dbHelper.getWritableDatabase();
 
-        Button btn1 = (Button)findViewById(R.id.button1);
+        Button btn1 = (Button)findViewById(R.id.infotutendbtn);
         btn1.setOnClickListener(this);
 
         Button btn2 = (Button)findViewById(R.id.button2);
@@ -89,7 +89,7 @@ public class InfoEditActivity extends Activity implements View.OnClickListener{
 				null,
 				options);
 
-		((ImageView)findViewById(R.id.imageView1)).setImageBitmap(capturedImage);
+		((ImageView)findViewById(R.id.imageseek)).setImageBitmap(capturedImage);
 
 		Cursor c = db.query("Category", new String[] {"category_name"}, null, null, null, null, null);
 
@@ -162,7 +162,7 @@ public class InfoEditActivity extends Activity implements View.OnClickListener{
 		Intent movein = null;
 		switch(v.getId()){
 
-		case R.id.button1:
+		case R.id.infotutendbtn:
 
 			category = str.toString();
 

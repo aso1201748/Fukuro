@@ -31,7 +31,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 		switch(v.getId()){
 
-			case R.id.button1:
+			case R.id.infotutendbtn:
 
 				//インテントに、この画面と、遷移する別の画面を指定する
 				intent = new Intent(MainActivity.this, CameraActivity.class);
@@ -61,6 +61,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 				break;
 
+			case R.id.button4:
+
+				//インテントに、この画面と、遷移する別の画面を指定する
+				intent = new Intent(MainActivity.this, petutorial.class);
+
+				//インテントで指定した別の画面に遷移する
+				startActivity(intent);
+
+				break;
+
 		}
 	}
 
@@ -69,7 +79,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-        Button btn1 = (Button)findViewById(R.id.button1);
+        Button btn1 = (Button)findViewById(R.id.infotutendbtn);
         btn1.setOnClickListener(this);
 
         Button btn2 = (Button)findViewById(R.id.button2);
@@ -77,6 +87,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         Button btn3 = (Button)findViewById(R.id.button3);
         btn3.setOnClickListener(this);
+
+        Button btn4 = (Button)findViewById(R.id.button4);
+        btn4.setOnClickListener(this);
 
 		db = dbHelper.getWritableDatabase();
 

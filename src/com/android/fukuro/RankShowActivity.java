@@ -94,7 +94,7 @@ public class RankShowActivity extends Activity implements DownloadListTaskCallba
 				e.printStackTrace();
 			}
 
-		ImageView imgView = (ImageView)findViewById(R.id.imageView1);
+		ImageView imgView = (ImageView)findViewById(R.id.imageseek);
 	    // アダプターを設定します
 	    imgView.setImageBitmap(myBitmap);
 	}

@@ -5,14 +5,14 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textbairitsu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="画像の情報を編集しよう"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imageseek"
         android:layout_width="match_parent"
         android:layout_height="358dp"
         android:layout_marginTop="10dp"
@@ -20,7 +20,7 @@
         android:src="@drawable/tst00" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/infotutendbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="次へ" />

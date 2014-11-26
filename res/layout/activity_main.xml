@@ -50,4 +50,14 @@
         android:layout_alignLeft="@+id/button2"
         android:text="tutorial" />
 
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="61dp"
+        android:text="tutorial2" />
+
 </RelativeLayout>

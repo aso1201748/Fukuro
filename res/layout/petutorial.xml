@@ -17,41 +17,6 @@
         android:layout_marginBottom="12dp"
         android:background="#00BBFF" />
 
-<RadioGroup
-    android:id="@+id/RadioGroup"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/view1"
-    android:layout_below="@+id/view1"
-    android:orientation="horizontal" >
-
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/eraser_radio"
-        android:button="@null"
-        android:checked="true" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/cutting_radio"
-        android:button="@null"
-        android:checked="false" />
-
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/move_radio"
-        android:button="@null"
-        android:checked="false" />
-</RadioGroup>
-
 <Button
     android:id="@+id/draw_back_btn"
     android:layout_width="wrap_content"
@@ -70,6 +35,43 @@
     android:layout_marginTop="87dp"
     android:text="撮影画像イメージ"
     android:textAppearance="?android:attr/textAppearanceMedium" />
+
+<RadioGroup
+    android:id="@+id/RadioGroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignRight="@+id/draw_back_btn"
+    android:layout_below="@+id/view1"
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal" >
+
+    <RadioButton
+        android:id="@+id/radioButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/eraser_radio"
+        android:button="@null"
+        android:checked="true" />
+
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/cutting_radio"
+        android:button="@null"
+        android:checked="false" />
+
+    <RadioButton
+        android:id="@+id/radioButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/move_radio"
+        android:button="@null"
+        android:checked="false" />
+</RadioGroup>
 
 <TextView
     android:id="@+id/textbairitsu"
@@ -93,8 +95,8 @@
     style="?android:attr/buttonStyleSmall"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/imageseek"
-    android:layout_toRightOf="@+id/textimage"
-    android:text="終わり" />
+    android:layout_alignParentBottom="true"
+    android:layout_alignRight="@+id/imageseek"
+    android:text="撮影しよう！" />
 
 </RelativeLayout>

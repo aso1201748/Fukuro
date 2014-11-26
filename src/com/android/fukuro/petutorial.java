@@ -3,17 +3,17 @@ package com.android.fukuro;
 import java.io.File;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -23,11 +23,9 @@ public class petutorial extends Activity {
 	private RadioButton eraser;
 	private RadioButton cutting;
 	private RadioButton move;
-	private AlertDialog.Builder alertDlg;
-	private String path = null;
-	private String picname = null;
 	private String previousview=null;
 	private String pen_mode=null;
+	Toast toast;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,59 +33,9 @@ public class petutorial extends Activity {
 		setContentView(R.layout.petutorial);
 
 		Log.d("picture_edit", "onCreate");
-		setTitle("画像編集");
+		setTitle("画像編集チュートリアル");
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		Intent inte = getIntent();
-		path = inte.getStringExtra("Fpath");
-		picname = inte.getStringExtra("Fname");
-		previousview=inte.getStringExtra("previousview");
-		Log.d("picture","picname="+picname);
-		if(previousview.equals("camera")){
-			// 確認ダイアログの生成
-	        alertDlg = new AlertDialog.Builder(this);
-	        alertDlg.setTitle("画像を保存しますか");
-	        //alertDlg.setMessage("");
-	        alertDlg.setPositiveButton(
-	            "OK",
-	            new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int which) {
-	                    // 上書き ボタンクリック処理
-	                }
-	            });
-	        alertDlg.setNegativeButton(
-	        	"キャンセル",
-	            new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int which) {
-	                    // キャンセル ボタンクリック処理
-	                }
-	            });
-		}else{
-			// 確認ダイアログの生成
-	        alertDlg = new AlertDialog.Builder(this);
-	        alertDlg.setTitle("画像を保存しますか");
-	        //alertDlg.setMessage("");
-	        alertDlg.setPositiveButton(
-	            "上書き",
-	            new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int which) {
-	                    // 上書き ボタンクリック処理
-	                }
-	            });
-	        alertDlg.setNeutralButton(
-	            "新規",
-	            new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int which) {
-	                    // 新規 ボタンクリック処理
-	                }
-	            });
-	        alertDlg.setNegativeButton(
-	        	"キャンセル",
-	            new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int which) {
-	                    // キャンセル ボタンクリック処理
-	                }
-	            });
-		}
+
 		File dir = new File("/data/data/com.android.fukuro/Item");
         if(dir.exists()){
 
@@ -107,9 +55,36 @@ public class petutorial extends Activity {
 	        	public void onClick(View v) {
 
 				 //バックボタンでの処理
-
+				 toast = Toast.makeText(petutorial.this, "消しゴム又はハサミボタン選択時に、\n行った処理を一つ戻すことができます。",Toast.LENGTH_LONG);
+				 toast.setGravity(Gravity.AXIS_CLIP, 0, -300);
+				 toast.show();
 			 	}
 		 });
+
+		Button btnend = (Button)findViewById(R.id.infotutendbtn);
+		 btnend.setOnClickListener(new View.OnClickListener() {
+			 @Override
+		       	public void onClick(View v) {
+
+					Intent intent = new Intent(petutorial.this, CameraActivity.class);
+
+					//インテントで指定した別の画面に遷移する
+					startActivity(intent);
+
+					finish();
+			 	}
+		 });
+
+		ImageView imgbtn = (ImageView)findViewById(R.id.imageseek);
+		 imgbtn.setOnClickListener(new View.OnClickListener() {
+				 @Override
+		        	public void onClick(View v) {
+
+					 toast = Toast.makeText(petutorial.this, "消しゴムのサイズを変更できます。",Toast.LENGTH_LONG);
+					 toast.setGravity(Gravity.AXIS_CLIP, 0, -300);
+					 toast.show();
+				 	}
+			 });
 
 	     // ラジオグループのオブジェクトを取得
 	        RadioGroup rg = (RadioGroup)findViewById(R.id.RadioGroup);
@@ -128,7 +103,9 @@ public class petutorial extends Activity {
 	                if(radioButton.getId() == eraser.getId()) {
 
 	                	//消しゴムを押したときの処理
-	                    Toast.makeText(petutorial.this, "撮影した写真の不要な部分をなぞることで削除することができます。",Toast.LENGTH_SHORT).show();
+	                    toast = Toast.makeText(petutorial.this, "撮影した写真の不要な部分をなぞることで\n削除することができます。",Toast.LENGTH_LONG);
+		   				toast.setGravity(Gravity.AXIS_CLIP, 0, -300);
+						toast.show();
 
 	                	pen_mode="eraser";
 	                	Log.d("ラジオボタン","消しゴムを押した");
@@ -136,6 +113,9 @@ public class petutorial extends Activity {
 	                }else if(radioButton.getId()==cutting.getId()){
 
 	                	//はさみを押したときの処理
+	                	toast = Toast.makeText(petutorial.this, "撮影した写真の必要な部分を囲むことで、\n囲んだ範囲以外を削除することができます。",Toast.LENGTH_LONG);
+	                	toast.setGravity(Gravity.AXIS_CLIP, 0, -300);
+						toast.show();
 
 	                	pen_mode="cutting";
 	                	Log.d("ラジオボタン","ハサミを押した");
@@ -143,6 +123,9 @@ public class petutorial extends Activity {
 	                }else if(radioButton.getId()==move.getId()){
 
 	                	//移動を押したときの処理
+	                	toast = Toast.makeText(petutorial.this, "撮影した写真を枠内で移動することができます。",Toast.LENGTH_LONG);
+	                	toast.setGravity(Gravity.AXIS_CLIP, 0, -300);
+						toast.show();
 
 	                	pen_mode="move";
 	                	Log.d("ラジオボタン","移動を押した");
@@ -156,8 +139,6 @@ public class petutorial extends Activity {
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
-		path = null;
-		picname = null;
 		previousview=null;
 		pen_mode=null;
 	}
@@ -176,12 +157,19 @@ public class petutorial extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if(id == android.R.id.home){
-            finish();
+			 //バックボタンでの処理
+			 toast = Toast.makeText(petutorial.this, "ホーム画面に戻ります。",Toast.LENGTH_SHORT);
+			 toast.setGravity(Gravity.AXIS_CLIP, 0, -300);
+			 toast.show();
+
             return true;
 		}else if (id == R.id.save) {
-			// 表示
-		     alertDlg.create().show();
-			 //penview.saveBitmapToSd();
+			// 表
+			 //バックボタンでの処理
+			 toast = Toast.makeText(petutorial.this, "編集した画像を保存します。",Toast.LENGTH_SHORT);
+			 toast.setGravity(Gravity.AXIS_CLIP, 0, -300);
+			 toast.show();
+
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
